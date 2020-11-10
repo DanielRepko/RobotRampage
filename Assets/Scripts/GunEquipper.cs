@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GunEquipper : MonoBehaviour
 {
+    [SerializeField]
+    GameUI gameUI;
+
     public static string activeWeaponType;
 
     // GameObject fields to hold the gun objects
@@ -31,16 +34,19 @@ public class GunEquipper : MonoBehaviour
         {
             LoadWeapon(pistol);
             activeWeaponType = Constants.Pistol;
+            gameUI.UpdateReticle();
         }
         else if (Input.GetKeyDown("2"))
         {
             LoadWeapon(assaultRifle);
             activeWeaponType = Constants.AssaultRifle;
+            gameUI.UpdateReticle();
         }
         else if (Input.GetKeyDown("3"))
         {
             LoadWeapon(shotgun);
             activeWeaponType = Constants.Shotgun;
+            gameUI.UpdateReticle();
         }
     }
 

@@ -15,6 +15,25 @@ public class GameUI : MonoBehaviour
     [SerializeField]
     Image reticle;
 
+    // changes the reticle being used
+    public void UpdateReticle()
+    {
+        switch (GunEquipper.activeWeaponType)
+        {
+            case Constants.Pistol:
+                    reticle.sprite = redReticle;
+                break;
+            case Constants.Shotgun:
+                reticle.sprite = yellowReticle;
+                break;
+            case Constants.AssaultRifle:
+                reticle.sprite = blueReticle;
+                break;
+            default:
+                return;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
