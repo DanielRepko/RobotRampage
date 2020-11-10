@@ -7,6 +7,10 @@ public class Gun : MonoBehaviour
     public float fireRate;
     protected float lastFireTime;
 
+    public Ammo ammo;
+    public AudioClip liveFire;
+    public AudioClip dryFire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,20 @@ public class Gun : MonoBehaviour
 
     protected void Fire()
     {
-        GetComponentInChildren<Animator>().Play("Fire");
+        //checking to see if the current gun has ammo
+        if (ammo.HasAmmo(tag))
+        {
+            // if it does then play the regular fire sound clip
+            GetComponent<AudioSource>().PlayOneShot(liveFire);
+            GetComponentInChildren<Animator>().Play("Fire");
+            ammo.ConsumeAmmo(tag);
+        }
+        else
+        {
+            // otherwise play the empty fire clip
+            GetComponent<AudioSource>().PlayOneShot(dryFire);
+        }
+
+        
     }
 }
