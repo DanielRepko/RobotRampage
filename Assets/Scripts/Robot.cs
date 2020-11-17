@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class Robot : MonoBehaviour
 {
+    //holds the prefab for the missle
+    //Serialize field makes the field visible in the inspector but not to other scripts
+    [SerializeField]
+    GameObject missilePrefab;
+
     [SerializeField]
     private string robotType;
 
@@ -14,7 +19,7 @@ public class Robot : MonoBehaviour
     public float fireRate;
 
     //where to fire the missile from
-    public Transform missleFireSpot;
+    public Transform missileFireSpot;
     public NavMeshAgent agent;
 
     private Transform player;
@@ -52,6 +57,11 @@ public class Robot : MonoBehaviour
 
     private void Fire()
     {
+        //instantiating the missile
+        GameObject missile = Instantiate(missilePrefab);
+        //setting the rotation and position of the missile to that of the missileFireSpot
+        missile.transform.position = missileFireSpot.transform.position;
+        missile.transform.rotation = missileFireSpot.transform.rotation;
         robot.Play("Fire");
     }
 }
