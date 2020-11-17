@@ -28,9 +28,12 @@ public class Missile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //adding this otherwise the missle start bouncing off of the walls until they despawn
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.GetComponent<Player>() != null && collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+        }
         Destroy(gameObject);
     }
 }
