@@ -9,9 +9,11 @@ public class Robot : MonoBehaviour
     private string robotType;
 
     public int health;
+    //the range that the robot can fire from
     public int range;
     public float fireRate;
 
+    //where to fire the missile from
     public Transform missleFireSpot;
     public NavMeshAgent agent;
 
@@ -19,6 +21,8 @@ public class Robot : MonoBehaviour
     private float timeLastFired;
 
     private bool isDead;
+
+    public Animator robot;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +52,6 @@ public class Robot : MonoBehaviour
 
     private void Fire()
     {
-        
+        robot.Play("Fire");
     }
 }
