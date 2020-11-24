@@ -51,6 +51,9 @@ public class GameUI : MonoBehaviour
             case Constants.AssaultRifle:
                 reticle.sprite = blueReticle;
                 break;
+            case Constants.RobotGun:
+                reticle.sprite = redReticle;
+                break;
             default:
                 return;
         }

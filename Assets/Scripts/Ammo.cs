@@ -14,6 +14,8 @@ public class Ammo : MonoBehaviour
     private int shotgunAmmo = 10;
     [SerializeField]
     private int assaultRifleAmmo = 50;
+    [SerializeField]
+    private int robotGunAmmo = 15;
 
     // Dictionary is a list containing key value pairs, with this one having a string key for the gun type, and an int value for the amount of ammo
     public Dictionary<string, int> tagToAmmo;
@@ -24,7 +26,8 @@ public class Ammo : MonoBehaviour
         {
             { Constants.Pistol, pistolAmmo },
             { Constants.Shotgun, shotgunAmmo},
-            { Constants.AssaultRifle, assaultRifleAmmo }
+            { Constants.AssaultRifle, assaultRifleAmmo },
+            { Constants.RobotGun, robotGunAmmo }
         };
     }
 

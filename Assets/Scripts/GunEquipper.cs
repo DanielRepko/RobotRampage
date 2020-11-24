@@ -15,6 +15,7 @@ public class GunEquipper : MonoBehaviour
     public GameObject pistol;
     public GameObject assaultRifle;
     public GameObject shotgun;
+    public GameObject robotGun;
 
     public GameObject activeGun;
 
@@ -50,6 +51,12 @@ public class GunEquipper : MonoBehaviour
             activeWeaponType = Constants.Shotgun;
             gameUI.UpdateReticle();
         }
+        else if (Input.GetKeyDown("4"))
+        {
+            LoadWeapon(robotGun);
+            activeWeaponType = Constants.RobotGun;
+            gameUI.UpdateReticle();
+        }
     }
 
     public GameObject GetActiveWeapon()
@@ -62,6 +69,7 @@ public class GunEquipper : MonoBehaviour
         pistol.SetActive(false);
         assaultRifle.SetActive(false);
         shotgun.SetActive(false);
+        robotGun.SetActive(false);
 
         weapon.SetActive(true);
         activeGun = weapon;

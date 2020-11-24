@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Game game;
+    public AudioClip playerDead;
+
     public int health;
     public int armor;
     public GameUI gameUI;
     private GunEquipper gunEquipper;
     private Ammo ammo;
 
+    private float height;
+
     // Start is called before the first frame update
     void Start()
     {
         ammo = GetComponent<Ammo>();
         gunEquipper = GetComponent<GunEquipper>();
+
+        height = transform.position.y; // initializing the height
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // setting the player's height each frame because they will sometimes get put into the air when colliding with robots
+        transform.position = new Vector3(transform.position.x,
+                                         height,
+                                         transform.position.z);
     }
 
     public void TakeDamage(int amount)
@@ -45,7 +55,8 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
-            Debug.Log("Game Over");
+            GetComponent<AudioSource>().PlayOneShot(playerDead);
+            game.GameOver();
         }
     }
 

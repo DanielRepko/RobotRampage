@@ -7,6 +7,8 @@ public class Missile : MonoBehaviour
     public float speed = 30f;
     public int damage = 10;
 
+    public bool shotByPlayer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,10 +32,22 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<Player>() != null && collision.gameObject.tag == "Player")
+        //check if robot shooting and hit player
+        if (collision.gameObject.GetComponent<Player>() != null && collision.gameObject.tag == "Player" && !shotByPlayer)
         {
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        //check if player shooting and hit robot
+        else if (shotByPlayer && collision.gameObject.GetComponent<Robot>() != null)
+        {
+            collision.gameObject.GetComponent<Robot>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        //destroying missile if it hits a wall
+        else if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }
