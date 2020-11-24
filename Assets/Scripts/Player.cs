@@ -34,14 +34,16 @@ public class Player : MonoBehaviour
             if(effectiveArmor > 0)
             {
                 armor = effectiveArmor / 2;
+                gameUI.SetArmorText(armor);
                 return;
             }
             armor = 0;
+            gameUI.SetArmorText(armor);
         }
         health -= healthDamage;
-        Debug.Log("Health is: " + health);
+        gameUI.SetHealthText(health);
 
-        if(health <= 0)
+        if (health <= 0)
         {
             Debug.Log("Game Over");
         }
@@ -54,26 +56,46 @@ public class Player : MonoBehaviour
         {
             health = 200;
         }
+        //updating the health text after picking up health
+        gameUI.SetPickupText("Health picked up + 50 health");
+        gameUI.SetHealthText(health);
     }
 
     private void PickUpArmor()
     {
         armor += 15;
+        gameUI.SetPickupText("Armor picked up + 15 armor");
+        gameUI.SetArmorText(armor);
     }
 
     private void PickUpPistolAmmo()
     {
         ammo.AddAmmo(Constants.Pistol, 20);
+        gameUI.SetPickupText("Pistol ammo picked up + 20 ammo");
+        if (gunEquipper.GetActiveWeapon().tag == Constants.Pistol)
+        {
+            gameUI.SetAmmoText(ammo.GetAmmo(Constants.Pistol));
+        }
     }
 
     private void PickUpAssaultRifleAmmo()
     {
         ammo.AddAmmo(Constants.AssaultRifle, 50);
+        gameUI.SetPickupText("Assault rifle ammo picked up + 50 ammo");
+        if (gunEquipper.GetActiveWeapon().tag == Constants.AssaultRifle)
+        {
+            gameUI.SetAmmoText(ammo.GetAmmo(Constants.AssaultRifle));
+        }
     }
 
     private void PickUpShotgunAmmo()
     {
         ammo.AddAmmo(Constants.Shotgun, 10);
+        gameUI.SetPickupText("Shotgun ammo picked up + 10 ammo");
+        if (gunEquipper.GetActiveWeapon().tag == Constants.Shotgun)
+        {
+            gameUI.SetAmmoText(ammo.GetAmmo(Constants.Shotgun));
+        }
     }
 
     public void PickUpItem(int pickupType)

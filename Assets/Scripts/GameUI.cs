@@ -43,7 +43,7 @@ public class GameUI : MonoBehaviour
         switch (GunEquipper.activeWeaponType)
         {
             case Constants.Pistol:
-                    reticle.sprite = redReticle;
+                reticle.sprite = redReticle;
                 break;
             case Constants.Shotgun:
                 reticle.sprite = yellowReticle;
@@ -59,12 +59,80 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetArmorText(player.armor);
+        SetHealthText(player.health);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    // these methods set the text for the various ui text objects
+    public void SetArmorText(int armor)
+    {
+        armorText.text = "Armor: " + armor;
+    }
+
+    public void SetHealthText(int health)
+    {
+        healthText.text = "Health: " + health;
+    }
+
+    public void SetAmmoText(int ammo)
+    {
+        ammoText.text = "Ammo: " + ammo;
+    }
+
+    public void SetScoreText(int score)
+    {
+        scoreText.text = "" + score;
+    }
+    public void SetWaveText(int time)
+    {
+        waveText.text = "Next Wave: " + time;
+    }
+    public void SetEnemyText(int enemies)
+    {
+        enemyText.text = "Enemies: " + enemies;
+    }
+
+    public void ShowWaveClearBonus()
+    {
+        waveClearText.GetComponent<Text>().enabled = true;
+        StartCoroutine("hideWaveClearBonus");
+    }
+
+    IEnumerator hideWaveClearBonus()
+    {
+        yield return new WaitForSeconds(4);
+        waveClearText.GetComponent<Text>().enabled = false;
+    }
+
+    public void SetPickupText(string text)
+    {
+        pickupText.GetComponent<Text>().enabled = true;
+        pickupText.text = text;
+        StopCoroutine("hidePickupText");
+        StartCoroutine("hidePickupText");
+    }
+
+    IEnumerator hidePickupText()
+    {
+        yield return new WaitForSeconds(4);
+        pickupText.GetComponent<Text>().enabled = false;
+    }
+
+    public void ShowNewWaveText()
+    {
+        StartCoroutine("hideNewWaveText");
+        newWaveText.GetComponent<Text>().enabled = true;
+    }
+
+    IEnumerator hideNewWaveText()
+    {
+        yield return new WaitForSeconds(4);
+        newWaveText.GetComponent<Text>().enabled = false;
     }
 }
